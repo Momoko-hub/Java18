@@ -1,13 +1,69 @@
 package raise.tech.student.management;
 
+
+import java.util.HashMap;
+import java.util.Map;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 @SpringBootApplication
+@RestController
 public class Application {
+
+	private String name = "Momoko";
+	private String age = "29";
+
+	private final Map<String,String> studentProfile = new HashMap<>();{
+		studentProfile.put("Yojiro","39");
+		studentProfile.put("Kuwa","39");
+		studentProfile.put("Takeda","39");
+		studentProfile.put("Satoshi","39");
+
+	}
 
 	public static void main(String[] args) {
 		SpringApplication.run(Application.class, args);
+	}
+
+	@GetMapping("/studentInfo")
+	public String getStudentInfo(){
+		return name + " " + age + "歳";
+	}
+
+	@PostMapping("/studentInfo")
+	public void setStudentInfo(String name,String age){
+		this.name = name;
+		this.age = age;
+	}
+
+	@PostMapping("/studentName")
+	public void updateStudentName(String name){
+		this.name = name;
+
+	}
+
+	//Map
+
+	@GetMapping("/studentProfile")
+	public Map<String, String> getStudentProfile(){
+		return studentProfile;
+	}
+
+	@PostMapping("/studentProfile")
+	public void updateStudentProfile(@RequestParam String name,String age){
+		//nameが既に存在するかチェック
+		if (studentProfile.containsKey(name)) {
+			//存在する場合は上書き
+			studentProfile.put(name, age);
+		}else {
+			//存在しない場合は新しいエントリに追加
+			studentProfile.put(name,age);
+
+		}
 	}
 
 }
