@@ -17,11 +17,11 @@ public class Application {
 	private String name = "Momoko";
 	private String age = "29";
 
-	private final Map<String,String> studentProfile = new HashMap<>();{
-		studentProfile.put("Yojiro","39");
-		studentProfile.put("Kuwa","39");
-		studentProfile.put("Takeda","39");
-		studentProfile.put("Satoshi","39");
+	private final Map<String,String> studentsProfile = new HashMap<>();{
+		studentsProfile.put("Yojiro","39");
+		studentsProfile.put("Kuwa","39");
+		studentsProfile.put("Takeda","39");
+		studentsProfile.put("Satoshi","39");
 
 	}
 
@@ -29,39 +29,39 @@ public class Application {
 		SpringApplication.run(Application.class, args);
 	}
 
-	@GetMapping("/studentInfo")
-	public String getStudentInfo(){
+	@GetMapping("/studentsNameAge")
+	public String getStudentNameAge(){
 		return name + " " + age + "歳";
 	}
 
-	@PostMapping("/studentInfo")
-	public void setStudentInfo(String name,String age){
+	@PostMapping("/studentsNameAge")
+	public void setStudentsNameAge(String name,String age){
 		this.name = name;
 		this.age = age;
 	}
 
-	@PostMapping("/studentName")
-	public void updateStudentName(String name){
+	@PostMapping("/studentsName")
+	public void updateStudentsName(String name){
 		this.name = name;
 
 	}
 
 	//Map
 
-	@GetMapping("/studentProfile")
-	public Map<String, String> getStudentProfile(){
-		return studentProfile;
+	@GetMapping("/studentsProfile")
+	public Map<String, String> getStudentsProfile(){
+		return studentsProfile;
 	}
 
 	@PostMapping("/studentProfile")
-	public void updateStudentProfile(@RequestParam String name,String age){
+	public void updateStudentsProfile(@RequestParam String name,String age){
 		//nameが既に存在するかチェック
-		if (studentProfile.containsKey(name)) {
+		if (studentsProfile.containsKey(name)) {
 			//存在する場合は上書き
-			studentProfile.put(name, age);
+			studentsProfile.put(name, age);
 		}else {
 			//存在しない場合は新しいエントリに追加
-			studentProfile.put(name,age);
+			studentsProfile.put(name,age);
 
 		}
 	}
