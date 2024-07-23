@@ -53,7 +53,7 @@ public class Application {
 		return studentsProfile;
 	}
 
-	@PostMapping("/studentProfile")
+	@PostMapping("/studentsProfile")
 	public void updateStudentsProfile(@RequestParam String name,String age){
 		//nameが既に存在するかチェック
 		if (studentsProfile.containsKey(name)) {
