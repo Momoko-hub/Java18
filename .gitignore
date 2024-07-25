@@ -1,8 +1,4 @@
-# ビルド出力ディレクトリ
 build/
-
-# IntelliJ IDEAの設定ファイルディレクトリ
-.idea/
-
-# Gradleのキャッシュディレクトリ
 .gradle/
+.idea/
+src/.idea/
